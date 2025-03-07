@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Dashboard</title>
+</head>
+<body>
+    <h2>Welcome, {{ username }}</h2>
+    <p>This is a protected page.</p>
+    <button id="logout-btn">Logout</button>
+    <script>
+        document.getElementById("logout-btn").addEventListener("click", function () {
+            fetch("/logout", {
+                method: "POST",
+                credentials: "include" // Ensures cookies are sent
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data.message);
+                window.location.href = "/"; // Redirect to home after logout
+            })
+            .catch(error => console.error("Logout failed:", error));
+        });
+    </script>
+</body>
+</html>
